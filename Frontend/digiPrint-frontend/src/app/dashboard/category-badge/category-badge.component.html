@@ -1,0 +1,21 @@
+
+<div class="ellipse-container" (click)="onClick()">
+  <div class="ellipse">
+    <div class="rotating-dot" [ngStyle]="getRotationStyle(percentage)">
+      <div class="ellisep-edge-1"><span class="dot"></span></div>
+    </div>
+    <div class="ellisep-edge-2"></div>
+    <div class="ellipse-2">
+      <p class="title">{{category}}</p>
+      <p class="grade">{{percentage}}%</p>
+      <p>{{count}}/{{totalVideos}}</p>
+      <!-- Badge Icon -->
+      <div class="badge-icon">
+        <i class="fa" [ngClass]="'fa-' + iconName"></i>
+        <!-- OR if using images -->
+        <!-- <img [src]="'assets/icons/' + iconName + '.svg'" alt="Icon" width="24"> -->
+      </div>
+    </div>
+  </div>
+</div>
+

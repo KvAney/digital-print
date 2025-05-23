@@ -1,0 +1,213 @@
+
+.arc {
+  margin-bottom: 8px;
+}
+.label {
+  font-weight: bold;
+}
+.card {
+  width: 100px;
+  height: 140px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+}
+
+.ellipse:hover {
+  transform: scale(1.08);
+  
+  border: 35px solid rgb(192, 255, 233)
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.ellipse-container {
+  height: 323px;
+  width: 317px;
+}
+
+.ellipse {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 35px solid rgba(122, 211, 255, 1);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.ellipse::before {
+  content: ' ';
+  width: 254px;
+  height: 252px;
+  background: #FFF;
+  position: absolute;
+  bottom: -41px;
+  right: -39px;
+  /*border: 1px solid;*/
+}
+
+.ellipse-2 {
+  width: 231.73px;
+  height: 231.73px;
+  border: 2px dashed #373838;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.ellipse-2::before {
+  content: ' ';
+  position: absolute;
+  bottom: -3px;
+  left: 28%;
+  width: 120px;
+  height: 30px;
+  background: #FFFF;
+}
+
+.ellipse-2 p {
+  margin: 0;
+}
+
+.ellipse-2 p.title {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+}
+.badge-icon {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 24px;
+  color: #555;
+}
+.ellipse-2 p.grade {
+  font-family: Open Sans;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 54px;
+}
+
+.ellisep-edge-1,
+.ellisep-edge-2 {
+  width: 45.5px;
+  height: 45.5px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.rotating-dot {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform-origin: center;
+  pointer-events: none; /* Allows clicks to pass through */
+}
+
+.ellisep-edge-1 {
+  background: rgba(122, 211, 255, 1);
+  width: 45.5px;
+  height: 45.5px;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ellisep-edge-1 .dot {
+  width: 7px;
+  height: 7px;
+  background: #fff;
+  border-radius: 50%;
+}
+
+
+
+
+.ellisep-edge-2 {
+  background: rgba(122, 211, 255, 1);
+  bottom: -7px;
+  left: 18px;
+}
+
+.category-badge {
+  position: relative;
+  width: 160px; /* Adjust as needed */
+  height: 80px;  /* Should be half of the width for a 2:1 semi-circle aspect ratio */
+  display: flex;
+  flex-direction: column; /* Stack content (though SVG is absolute) */
+  align-items: center; /* Center content horizontally */
+  justify-content: flex-end; /* Push text content towards the bottom (base of the semi-circle) */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 15px;
+  box-sizing: border-box;
+  filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.12)); /* Subtle shadow for depth */
+}
+
+.progress-ring {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* Ensure the SVG doesn't overflow its container if path/stroke is at the very edge */
+  overflow: visible; /* Or adjust viewBox/path to ensure stroke is within bounds */
+}
+
+.progress-ring__track {
+  /* stroke, stroke-width, and d are set via [attr] bindings */
+}
+
+.progress-ring__progress {
+  /* stroke, stroke-width, and d are set via [attr] bindings */
+  /* stroke-linecap is round (set in HTML) */
+  transition: stroke-dashoffset 0.6s cubic-bezier(0.65, 0, 0.35, 1),
+              stroke 0.6s ease; /* Smooth transition for progress and color changes */
+}
+
+.badge-content {
+  position: relative; /* To sit on top of the absolute positioned SVG */
+  z-index: 1;
+  text-align: center;
+  padding-bottom: 8px; /* Adjust to position text nicely above the bottom edge */
+  color: #333; /* Default text color */
+  line-height: 1.2;
+  width: 100%; /* Ensure text centering works well */
+}
+
+.category-name {
+  font-size: 0.85em; /* Relative to .category-badge font-size or use px */
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 2px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.percentage-value {
+  font-size: 1.4em; /* Relative to .category-badge font-size or use px */
+  font-weight: 700;
+  color: #111; /* Darker for emphasis */
+}
+
+/* Example: If you set a base font-size on the badge, em units will scale with it */
+/* .category-badge {
+  font-size: 10px; // Then 0.85em = 8.5px, 1.4em = 14px
+} */

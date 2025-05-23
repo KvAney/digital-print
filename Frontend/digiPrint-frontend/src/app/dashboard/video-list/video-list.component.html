@@ -1,0 +1,6 @@
+<div class="video-list">
+  <div *ngFor="let video of videos" class="video-item">
+    <img [src]="video.thumbnailUrl" alt="thumbnail" />
+    <div>{{ video.title }}</div>
+  </div>
+</div>
