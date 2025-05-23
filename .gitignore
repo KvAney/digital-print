@@ -1,6 +1,9 @@
 *.pyc
 */__pycache__
 config/*
+Backend/config/client_secret*.json
+Backend/config/token.pickle
+
 
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
