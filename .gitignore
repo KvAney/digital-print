@@ -3,8 +3,10 @@
 config/*
 Backend/config/client_secret*.json
 Backend/config/token.pickle
+Frontend/digiPrint-frontend/node_modules
+Frontend/digiPrint-frontend/.angular/cache
 
-
+Frontend/digiPrint-frontend/.vscode
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # Compiled output

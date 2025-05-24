@@ -1,20 +1,19 @@
-version: "3.8"
-
 services:
   backend:
     build:
-      context: ./backend
+      context: ./Backend
     ports:
       - "5000:5000"
     volumes:
-      - ./backend:/app
-    restart: always
+      - ./Backend:/app
+
 
   frontend:
     build:
-      context: ./frontend/digiPrint-Frontend
+      context: ./Frontend/digiPrint-frontend
     ports:
       - "80:80"
     depends_on:
       - backend
-    restart: always
+    volumes:
+      - ./Frontend/digiPrint-frontend:/app

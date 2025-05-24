@@ -1,21 +1,13 @@
-# Base Angular image
-FROM node:18
+# Use Node for build stage
+FROM node:18-alpine as build
 
-# Set working directory
 WORKDIR /app
-
-# Copy package.json and install dependencies
-COPY package*.json ./
-RUN npm install
-
-# Copy Angular project
 COPY . .
-
-# Build the Angular app
+RUN npm install
 RUN npm run build --prod
 
-# Serve with nginx
+# Use Nginx for serving Angular app
 FROM nginx:alpine
-COPY --from=0 /app/dist/* /usr/share/nginx/html
+COPY --from=build /app/dist/* /usr/share/nginx/html
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
