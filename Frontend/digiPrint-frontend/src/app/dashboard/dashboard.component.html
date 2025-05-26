@@ -29,6 +29,7 @@
   </div>
 
   <div class="video-list-section">
-    <app-video-list [videos]="filteredVideos"></app-video-list>
+    <app-video-list [videos]="filteredVideos"
+      (deleteVideo)="deleteVideo($event)"></app-video-list>
   </div>
 </div>

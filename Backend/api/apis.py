@@ -1,30 +1,42 @@
 
-from Backend.utils.Videotemplate import Video
+from utils.Videotemplate import Video
 
-from Backend.utils.mappings import load_category_mappings
-from Backend.starter import get_authenticated_service
+from utils.mappings import load_category_mappings
+from starter import get_authenticated_service
 # get your utube liked video
 
 # Step 2: Fetch liked videos
 def get_liked_videos(youtube):
-    request = youtube.videos().list(
-        part="snippet,contentDetails,statistics",
-        myRating="like",
-        maxResults=25
-    )
-    response = request.execute()   
+    next_page_token = None
+    liked_videos = []
+    while True:
+        request = youtube.videos().list(
+            part="snippet,contentDetails,statistics",
+            myRating="like",
+            maxResults=50,
+            pageToken=next_page_token
+        )
+        response = request.execute()   
+        liked_videos.extend(response.get("items", []))
+        next_page_token = response.get("nextPageToken")
+        if not next_page_token:
+            break
     
-    return response.get("items", [])
+    return liked_videos
 
-def remove_like():
-    video_id = request.get('video_id')
-    youtube = get_authenticated_service()
-    request = youtube.videos().rate(
-        id=video_id,
-        rating="none"
-    )
-    request.execute()
-    print(f"Removed like from video: {video_id}")
+def remove_like(video_id):
+    try:
+        youtube = get_authenticated_service()
+        request = youtube.videos().rate(
+            id=video_id,
+            rating="none"
+        )
+        request.execute()
+        print(f"Removed like from video: {video_id}")
+    except Exception as e: 
+        return e
+
+    return 1
 
 # Main execution
 def getDetails():
@@ -51,7 +63,6 @@ def getDetails():
             categorySpecified[cat].append(VideoObj.to_dict())
         else:
             categorySpecified[cat] = [VideoObj.to_dict()]
-    print(categorySpecified)
     return categorySpecified
     
 

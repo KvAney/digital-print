@@ -4,8 +4,9 @@ FROM python:3.10-slim
 # Set working directory
 WORKDIR /app
 
-# Copy everything to container
+# Copy everything in current context into the container
 COPY . .
+COPY ./config /app/Backend/config
 
 # Install dependencies
 RUN pip install --upgrade pip

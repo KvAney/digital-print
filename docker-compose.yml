@@ -1,19 +1,27 @@
+version: '3'
+
 services:
   backend:
     build:
       context: ./Backend
+      dockerfile: Dockerfile
     ports:
       - "5000:5000"
     volumes:
-      - ./Backend:/app
+      - ./Backend:/app/Backend
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/Backend/config/client_secret_1web.json
 
 
   frontend:
     build:
-      context: ./Frontend/digiPrint-frontend
+      context: ./frontend/digiPrint-Frontend
+      dockerfile: Dockerfile
     ports:
-      - "80:80"
-    depends_on:
-      - backend
+      - "4200:80"
     volumes:
-      - ./Frontend/digiPrint-frontend:/app
+      - ./frontend/digiPrint-Frontend:/usr/src/app
+    restart: unless-stopped

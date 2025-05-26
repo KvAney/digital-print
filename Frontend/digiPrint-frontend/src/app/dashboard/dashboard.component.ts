@@ -48,6 +48,17 @@ export class DashboardComponent implements OnInit {
     console.log('🧾 Categories created:', this.categories);
   });
 }
+getIcon(category: string): string {
+  const iconMap: { [category: string]: string } = {
+    Comedy: 'laugh',
+    Sports: 'football-ball',
+    Politics: 'landmark',
+    Education: 'book-open',
+    Music: 'music'
+  };
+  return iconMap[category] || 'film';
+}
+
 
   onCategorySelected(categoryName: string): void {
     this.selectedCategory = categoryName;
@@ -67,6 +78,32 @@ export class DashboardComponent implements OnInit {
       this.filteredVideos = [];
     }
   }
+
+deleteVideo(videoId: string): void {
+  this.youtubeService.removeLike(videoId).subscribe({
+    next: () => {
+      // Remove from local list
+      this.filteredVideos = this.filteredVideos.filter(video => video.id !== videoId);
+
+      // Also update main category list
+      if (this.selectedCategory) {
+        const category = this.categories.find(c => c.name === this.selectedCategory);
+        if (category) {
+          category.videos = category.videos.filter(v => v.id !== videoId);
+          category.count = category.videos.length;
+          category.percentage = Math.round((category.count / this.totalVideos) * 100);
+        }
+      }
+
+      this.totalVideos -= 1;
+    },
+    error: (err) => {
+      console.error('❌ Failed to remove like:', err);
+    }
+  });
+}
+
+
 
  
 }

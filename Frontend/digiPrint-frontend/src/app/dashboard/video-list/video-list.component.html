@@ -2,5 +2,8 @@
   <div *ngFor="let video of videos" class="video-item">
     <img [src]="video.thumbnailUrl" alt="thumbnail" />
     <div>{{ video.title }}</div>
+     <div>{{ video.id }}</div>
+     <button (click)="onDelete(video.id)">❌ Remove Like</button>
+    
   </div>
 </div>
