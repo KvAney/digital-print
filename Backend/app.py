@@ -24,12 +24,10 @@ def load_Data():
 @app.route('/removeLike',methods=['POST'])
 def remove():
     video_id = request.get_json().get('video_id')
-    print('Somehitn?:',video_id)
     if not video_id:
         print('Nothign brp')
         return {"error": "Missing video_id"}, 400
     success = remove_like(video_id)
-    print('Bro success-==>',success)
     if success:
             return {"status": "success", "video_id": video_id}
     else:

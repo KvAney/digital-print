@@ -1,6 +1,6 @@
-<!-- TOP ROW: All categories -->
- <h1>Dashboard Loaded</h1>
-<!-- <div *ngIf="categories.length === 0">No categories yet</div> -->
+
+<div class = "body">
+
 <div class="category-top-row">
   <app-category-badge
     *ngFor="let c of categories"
@@ -15,21 +15,15 @@
 
 <!-- MAIN CONTENT: Selected badge on left, videos on right -->
 
-
-<div class="selected-view" *ngIf="selectedCategory">
-  <div class="selected-badge">
-    <app-category-badge
-      [category]="selectedCategory"
-      [percentage]="selectedStat?.percentage || 0">
-    </app-category-badge>
-    <div class="details">
-      <div><strong>Percent:</strong> {{ selectedStat?.percentage }}%</div>
-      <div><strong>Videos:</strong> {{ selectedStat?.count }}/{{ totalVideos }}</div>
-    </div>
-  </div>
-
   <div class="video-list-section">
-    <app-video-list [videos]="filteredVideos"
-      (deleteVideo)="deleteVideo($event)"></app-video-list>
+
+      <app-video-list
+  *ngIf="selectedCategory && selectedStat"
+  [selectedCategory]="selectedCategory"
+  [videos]="filteredVideos"
+  [badgeStats]="selectedStat"
+  (deleteVideo)="deleteVideo($event)"></app-video-list>
+
   </div>
+
 </div>

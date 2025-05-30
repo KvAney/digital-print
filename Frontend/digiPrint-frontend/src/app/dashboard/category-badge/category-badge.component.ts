@@ -21,6 +21,7 @@ export class CategoryBadgeComponent {
 }
 
   onClick() {
+    
     this.badgeClick.emit(this.category);
   }
 }

@@ -82,26 +82,51 @@ getIcon(category: string): string {
 deleteVideo(videoId: string): void {
   this.youtubeService.removeLike(videoId).subscribe({
     next: () => {
-      // Remove from local list
+      //  Remove from filtered list (visible videos in UI)
       this.filteredVideos = this.filteredVideos.filter(video => video.id !== videoId);
 
-      // Also update main category list
-      if (this.selectedCategory) {
-        const category = this.categories.find(c => c.name === this.selectedCategory);
-        if (category) {
-          category.videos = category.videos.filter(v => v.id !== videoId);
-          category.count = category.videos.length;
-          category.percentage = Math.round((category.count / this.totalVideos) * 100);
-        }
+      // Remove from the groupedVideos structure (main source of truth)
+      for (const category in this.groupedVideos) {
+        this.groupedVideos[category] = this.groupedVideos[category].filter(video => video.id !== videoId);
       }
 
-      this.totalVideos -= 1;
+      //  Recalculate total video count
+      this.totalVideos = Object.values(this.groupedVideos).reduce(
+        (sum, videos) => sum + videos.length, 0
+      );
+
+      //  Recompute the categories array and stats
+      this.categories = Object.entries(this.groupedVideos).map(([name, videos]) => ({
+        name,
+        videos,
+        count: videos.length,
+        iconName: this.getIcon(name),
+        percentage: this.totalVideos ? Math.round((videos.length / this.totalVideos) * 100) : 0
+      }));
+
+      //  Refresh selectedStat if a category is selected
+      if (this.selectedCategory) {
+        const matchedCategory = this.categories.find(c => c.name === this.selectedCategory);
+        if (matchedCategory) {
+          this.selectedStat = {
+            count: matchedCategory.count,
+            percentage: matchedCategory.percentage,
+            iconName: matchedCategory.iconName,
+            totalVideos: this.totalVideos,
+            name: matchedCategory.name
+          };
+
+          // Reapply filter to show updated list
+          this.filteredVideos = matchedCategory.videos;
+        }
+      }
     },
     error: (err) => {
-      console.error('❌ Failed to remove like:', err);
+      console.error(' Failed to remove like:', err);
     }
   });
 }
+
 
 
 

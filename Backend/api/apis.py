@@ -3,16 +3,34 @@ from utils.Videotemplate import Video
 
 from utils.mappings import load_category_mappings
 from starter import get_authenticated_service
+from itertools import islice
 # get your utube liked video
+def chunked(iterable, size):
+    it = iter(iterable)
+    return iter(lambda: list(islice(it, size)), [])
+
+def fetch_video_details(youtube, video_ids):
+    video_details = []
+
+    for chunk in chunked(video_ids, 50):
+        request = youtube.videos().list(
+            part="snippet,contentDetails,statistics",
+            id=",".join(chunk)
+        )
+        response = request.execute()
+        video_details.extend(response.get("items", []))
+
+    return video_details
+
 
 # Step 2: Fetch liked videos
 def get_liked_videos(youtube):
     next_page_token = None
     liked_videos = []
     while True:
-        request = youtube.videos().list(
-            part="snippet,contentDetails,statistics",
-            myRating="like",
+        request = youtube.playlistItems().list(
+            part="snippet,contentDetails",
+            playlistId="LL",#likedvideo playList
             maxResults=50,
             pageToken=next_page_token
         )
@@ -21,8 +39,9 @@ def get_liked_videos(youtube):
         next_page_token = response.get("nextPageToken")
         if not next_page_token:
             break
-    
-    return liked_videos
+    print(liked_videos[0])
+    video_ids = [item['contentDetails']['videoId'] for item in liked_videos]
+    return fetch_video_details(youtube, video_ids)
 
 def remove_like(video_id):
     try:

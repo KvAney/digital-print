@@ -10,6 +10,7 @@ import { Video } from '../models/video.model';
 export class DashboardComponent implements OnInit {
   categories: { name: string, percentage: number, videos: Video[] }[] = [];
   selectedCategory: string | null = null;
+selectedStat: any;
 
   constructor(private youtubeService: DataService) {}
 

@@ -1,21 +1,32 @@
 
-<div class="ellipse-container" (click)="onClick()">
-  <div class="ellipse">
-    <div class="rotating-dot" [ngStyle]="getRotationStyle(percentage)">
-      <div class="ellisep-edge-1"><span class="dot"></span></div>
-    </div>
-    <div class="ellisep-edge-2"></div>
-    <div class="ellipse-2">
-      <p class="title">{{category}}</p>
-      <p class="grade">{{percentage}}%</p>
-      <p>{{count}}/{{totalVideos}}</p>
-      <!-- Badge Icon -->
-      <div class="badge-icon">
-        <i class="fa" [ngClass]="'fa-' + iconName"></i>
-        <!-- OR if using images -->
-        <!-- <img [src]="'assets/icons/' + iconName + '.svg'" alt="Icon" width="24"> -->
-      </div>
-    </div>
+
+<div class="badge-container" (click)="onClick()">
+  <svg viewBox="0 0 180 100" class="progress-bar">
+    <path
+      d="M10,100 A80,80 0 0,1 170,100"
+      fill="none"
+      stroke="#e5e7eb"
+      stroke-width="15"
+    />
+    <path
+      d="M10,100 A80,80 0 0,1 170,100"
+      fill="none"
+      stroke="#3b82f6"
+      stroke-width="15"
+      stroke-dasharray="252"
+      [attr.stroke-dashoffset]="252 - (252 * percentage / 100)"
+      stroke-linecap="round"
+    />
+    <text x="90" y="90" text-anchor="middle" font-size="20" fill="#111827">
+      {{ percentage }}%
+    </text>
+  </svg>
+
+  <div class="badge-info">
+    <i class="fa fa-{{ iconName }} badge-icon"></i>
+    <h3>{{ category }}</h3>
+    <p>{{ count }} /{{totalVideos}}</p>
   </div>
 </div>
+
 

@@ -1,9 +1,22 @@
-<div class="video-list">
-  <div *ngFor="let video of videos" class="video-item">
-    <img [src]="video.thumbnailUrl" alt="thumbnail" />
-    <div>{{ video.title }}</div>
-     <div>{{ video.id }}</div>
-     <button (click)="onDelete(video.id)">❌ Remove Like</button>
-    
+<div class="dashboard-container">
+  <!-- Left side badge -->
+  
+     <div class="sidebar">
+    <app-category-badge
+      [category]="selectedCategory"
+      [count]="badgeStats!.count"
+      [percentage]="badgeStats!.percentage"
+      [totalVideos]="badgeStats!.totalVideos"
+      [iconName]="badgeStats!.iconName">
+    </app-category-badge>
+  </div>    
+
+  <!-- Right side scrollable video list -->
+  <div class="video-scrollable">
+    <div *ngFor="let video of videos" class="video-item">
+      <img [src]="video.thumbnailUrl" alt="Thumbnail" class="thumbnail" />
+      <div class="video-title">{{ video.title }}</div>
+      <button (click)="onDelete(video.id)" class="remove-button">Remove</button>
+    </div>
   </div>
 </div>
