@@ -2,20 +2,20 @@
 A full-stack application that analyzes your YouTube liked videos, categorizes them intelligently (AI planned), and visualizes your content preferences with interactive dashboards.
 
 ## 🚀 Features
-✅ OAuth2 Google Sign-in for secure access to liked videos
+OAuth2 Google Sign-in for secure access to liked videos
 
-📊 Dynamic Dashboard with category-wise statistics
+Dynamic Dashboard with category-wise statistics
 
-🔄 Real-time like-removal with badge update
+Real-time like-removal with badge update
 
-🧩 Modular Angular + Flask architecture
+Modular Angular + Flask architecture
 
-🐳 Dockerized for easy deployment
+Dockerized for easy deployment
 
 
-🧠 Planned: AI-Powered Categorization using video transcript, title, and metadata
+Planned: AI-Powered Categorization using video transcript, title, and metadata
 
-🔁 Planned: Redis support for caching and scalability
+Planned: Redis support for caching and scalability
 
 ## 🖥️ Tech Stack
 Layer	Technology
@@ -50,7 +50,7 @@ Docker and Docker Compose
 
 Google OAuth2 Credentials (Client ID & Secret)
 
-## 🚀 Installation
+## Installation
 ```bash
 ### 1. Clone the repo
 git clone https://github.com/your-username/digital-print.git
@@ -70,13 +70,13 @@ Frontend: http://localhost:4200
 Backend: http://localhost:5000
 
 ## 🔐 Security & Privacy
-🔒 OAuth2 tokens are stored locally, encrypted per user
+ OAuth2 tokens are stored locally, encrypted per user
 
-🔐 FLASK_SECRET_KEY secures session cookies
+ FLASK_SECRET_KEY secures session cookies
 
-✅ No YouTube data is permanently stored — all processing is session-based
+ No YouTube data is permanently stored — all processing is session-based
 
-🏷️ Keywords
+Keywords
 ```
 youtube, analytics, dashboard, angular, flask, docker, redis, nlp, ai, oauth2, video-intelligence, spaCy, category-classifier
 ```
